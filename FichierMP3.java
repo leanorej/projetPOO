@@ -2,6 +2,7 @@ package projetpoo;
 
 public class FichierMP3{
 	//attributs
+	protected String nom :
 	protected Métadonnées metad;
 	protected FluxAudio flux;
 	protected String type;
@@ -27,6 +28,10 @@ public class FichierMP3{
 		return this.flux;
 	}
 	
+	public String getNom(){
+		return this.nom;
+	}
+
 	public String getT(){
 		return this.type;
 	}
@@ -51,5 +56,7 @@ public class FichierMP3{
 		this.chemin = c;
 	}
 	
-	//public String toString(){}
+	public String toString(){
+		return nom + " : \n" + metad + "\ntype : " + type + "\nchemin : " + chemin;
+	}
 }

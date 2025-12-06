@@ -16,5 +16,4 @@ public class FluxAudio{
 		this.donnees = d;
 	}
 
-	//public String toString(){}
 }

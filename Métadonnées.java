@@ -1,6 +1,6 @@
 package projetpoo;
 
-public class Métadonnées {
+public class Metadonnees {
 	//attributs
 	protected String titre;
 	protected String artiste;
@@ -8,7 +8,7 @@ public class Métadonnées {
 	protected Duree duree;
 	protected int annee;
 	
-	public Métadonnées(String t, String art, String alb, Duree d, int an ){
+	public Metadonnees(String t, String art, String alb, Duree d, int an ){
 		this.titre = t;
 		this.artiste = art;
 		this.album = alb;
@@ -57,7 +57,12 @@ public class Métadonnées {
 	public void setAn(int an){
 		this.annee = an;
 	}
-	
-	//public String toString(){}
-	
+		
+	public String toString () {
+		return "titre : " + titre + "\nartiste : " + artiste + "\nalbum : " +this.album + "\ndurée : "+ duree + "\nannée de sortie : " + annee + "\ntype : " + type + "\n";
+	}
+
+
+
 }
+

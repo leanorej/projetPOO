@@ -36,6 +36,22 @@ public class Duree{
 		return this.h;
 	}
 	
-	//public String toString(){}
+	public String toString(){
+		if (h<10 && min<10 && sec<10)
+			return "0"+h+" : "+"0"+min+" : " + "0" +sec ;
+		if (h<10 && min<10)
+			return "0"+h+" : "+"0"+min+" : " +sec ;
+		if (h<10 && sec<10)
+			return "0"+h+" : "+min+" : " + "0" +sec ;
+		if (min<10 && sec<10)
+			return h+" : "+"0"+min+" : " + "0" +sec ;
+		if (h<10)
+			return "0"+h+" : "+min+" : " + sec ;
+		if (min<10)
+			return h+" : "+"0"+min+" : " + sec ;
+		if (sec<10)
+			return h+" : "+min+" : " + "0" +sec ;
+		return h +" : "+min+" : "+sec ;
+	}
 
 }

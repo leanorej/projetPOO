@@ -19,6 +19,4 @@ public class SourceLocale implements SourceAudio {
         return dossier;
     }
 
-    //@Override
-    //public String toString() {}
 }

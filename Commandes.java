@@ -33,5 +33,9 @@ public class Commandes {
     public String getD(){ 
     	return dossier;
     }
-    //public String toString(){}
+
+    public String toString(){
+        return "mode : " + mode + "\nnom du fichier : " + nomF + "\ndossier : " + dossier  ;
+    }
+
 }

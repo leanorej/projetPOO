@@ -6,5 +6,4 @@ public class Logiciel {
 
     public void lancer(Commandes c) {}
 
-	//public String toString() {}
 }

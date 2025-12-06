@@ -12,9 +12,13 @@ public class Playlist{
 		this.musiques = new ArrayList<>();
 	}
 	
-	//public void ajouter(FichierMP3 f){}
+	public void ajouter(FichierMP3 f){
+		musiques.add(f);
+	}
 	
-	//public void supperimer(FichierMP3 f){}
+	public void supprimer(FichierMP3 f){
+		musiques.remove(f);
+	}
 	
 	public void setNom(String n){
 		this.nom = n;
