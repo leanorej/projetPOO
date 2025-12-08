@@ -1,26 +1,62 @@
 package projetpoo;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+
 public class FichierMP3{
 	//attributs
-	protected String nom :
-	protected Métadonnées metad;
+	protected String nom;
+	protected Metadonnees metad;
 	protected FluxAudio flux;
 	protected String type;
 	protected String chemin;
 	
 	
-	public FichierMP3(Métadonnées m, FluxAudio f, String t, String c){
+	public FichierMP3(Metadonnees m, FluxAudio f, String t, String c){
 		this.metad = m;
 		this.flux = f;
 		this.type = t;
 		this.chemin = c;
+		File file = new File(c);
+        this.nom = file.getName();
 	}
 	
-	//public Métadonnées extraireMD(){}
+	public void extraireMD() throws IOException {
+		File f = new File(chemin);
+		if(!f.exists()){
+			return;
+		}
+		try (RandomAccessFile raf = new RandomAccessFile(f, "r")) {
+			raf.seek(raf.length() - 128);
+			byte[] buffer = new byte[128];
+            raf.read(buffer);
+            
+            String tag = new String(buffer, 0, 3);
+            if (!tag.equals("TAG")) {
+                System.out.println("Aucun tag ID3v1 trouvé.");
+                return;
+            }
+            
+            String titre   = new String(buffer, 3, 30).trim();
+            String artiste = new String(buffer, 33, 30).trim();
+            String album   = new String(buffer, 63, 30).trim();
+            String anneeStr = new String(buffer, 93, 4).trim();
+
+            Integer annee = null;
+            try { annee = Integer.parseInt(anneeStr); } catch (Exception e) {}
+
+            Duree d = new Duree(0, 0, 0);
+
+            this.metad = new Metadonnees(titre, artiste, album, d, annee);
+        }
+		
+	}
 	
 	//public void chargerFichier(){}
 	
-	public Métadonnées getM(){
+	public Metadonnees getM(){
 		return this.metad;
 	}
 	
@@ -40,7 +76,7 @@ public class FichierMP3{
 		return this.chemin;
 	}
 	
-	public void setM(Métadonnées m){
+	public void setM(Metadonnees m){
 		this.metad = m;
 	}
 	

@@ -6,19 +6,23 @@ public class Metadonnees {
 	protected String artiste;
 	protected String album;
 	protected Duree duree;
-	protected int annee;
+	protected Integer annee;
+	protected String type;
 	
-	public Metadonnees(String t, String art, String alb, Duree d, int an ){
+
+	public Metadonnees(String t, String art, String alb, Duree d, Integer an ){}
+
+	public Metadonnees(String t, String art, String alb, Duree d, Integer an, String type ){
+
 		this.titre = t;
 		this.artiste = art;
 		this.album = alb;
 		this.duree = d;
 		this.annee = an;
+		this.type = type;
 	}
 	
-	//public void afficher(){}
-	
-	public String getT(){
+	public String getTitre(){
 		return this.titre;
 	}
 	
@@ -34,11 +38,15 @@ public class Metadonnees {
 		return this.duree;
 	}
 	
-	public int getAn(){
+	public Integer getAn(){
 		return this.annee;
 	}
 	
-	public void setT(String t){
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setTitre(String t){
 		this.titre = t;
 	}
 	
@@ -54,15 +62,18 @@ public class Metadonnees {
 		this.duree = d;
 	}
 	
-	public void setAn(int an){
+	public void setAn(Integer an){
 		this.annee = an;
 	}
 		
 	public String toString () {
 		return "titre : " + titre + "\nartiste : " + artiste + "\nalbum : " +this.album + "\ndurée : "+ duree + "\nannée de sortie : " + annee + "\ntype : " + type + "\n";
 	}
+	
+	public void setType(String type){
+		this.type = type;
+	}
 
-
-
+	
 }
 
