@@ -8,55 +8,53 @@ import java.util.Iterator;
 
 public class ExplorateurRep {
 
-    ArrayList<File> listeMP3;
+    ArrayList<FichierMP3> listeMP3;
 
     public ExplorateurRep() {
-        this.listeMP3 = new ArrayList<File> ();
+        this.listeMP3 = new ArrayList<FichierMP3> ();
     }
 
-    public ArrayList<File> repertoire(String chemin){
+    public ArrayList<FichierMP3> repertoire (String chemin){
+
         File dossier = new File (chemin);
 
         if (!dossier.exists()){
             System.out.println("Le dossier n'existe pas, mauvais chemin.");
-            return null;
+            return this.listeMP3;
         }
         else {
-            FilenameFilter filtre = new FilenameFilter() {
-                public boolean accept(File dossier, String nom){
-                    return nom.endsWith(".MP3");
-                }
-            };
+            File[] liste = dossier.listFiles();
             
-            File[] liste = dossier.listFiles(filtre);
-            
-            if (liste==null)
-                return null;
-
-            int i=0;
-            while(i<liste.length){
-                this.listeMP3.add(liste[i]);
-                i++;
+            if (liste !=null){
+                for (File f : liste){
+                    if (f.isDirectory())
+                        repertoire(f.getAbsolutePath());
+                    if(f.isFile()){
+                        if (f.getName().toLowerCase().endsWith(".mp3")){
+                            this.listeMP3.add(f);
+                            }
+                        }
+                    }
             }
             return this.listeMP3;
         }
     }
 
-    public String[] getListeMP3(){
+    public ArrayList<FichierMP3> getListeMP3(){
         return this.listeMP3;
     }
     
     public ArrayList <String> cheminMP3(String chemin){
-        ExplorateurRep e = new ExplorateurRep(chemin);
-        String[] liste = e.getListeMP3();
-        int i = 0;
+        ExplorateurRep e = new ExplorateurRep();
+        e.repertoire(chemin);
+
+        ArrayList<FichierMP3> liste = e.getListeMP3();
+
         ArrayList<String> chemins= new ArrayList<>();
-        String nomChemin;
-        while (i<liste.length){
-            nomChemin=liste[i].getAbsolutePath();
-            chemins.add(nomChemin);
-            i++;
-        }
+        for (FichierMP3 f : liste)
+            chemins.add(f.getAbsolutePath());
+    
         return chemins;
     }
+
 }

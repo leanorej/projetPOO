@@ -8,24 +8,35 @@ public class Playlist{
 	//attributs
 	protected String nom;
 	protected ArrayList<FichierMP3> musiques;
-	
-	ListIterator<FichierMP3> it = musiques.listIterator() ;
+	protected ListIterator<FichierMP3> it ;
+
 
 	public Playlist(String n){
 		this.nom = n;
 		this.musiques = new ArrayList<>();
+		this.it=musiques.listIterator();
+	}
+
+	public Playlist(String n, String chemin){
+		this.nom=n;
+		ExplorateurRep e = new ExplorateurRep();
+		e.repertoire(chemin);
+		this.musiques=e.getListeMP3();
+		this.it=musiques.listIterator();
 	}
 
 	
 	public void ajouter(FichierMP3 f){
-		if (f!=NULL)
+		this.it=musiques.listIterator();
+		if (f!=null)
 			musiques.add(f);
 		else 
 			System.out.println("Impossible d'ajouter, problème de fichier.");
     }
 	
 	public void supprimer(FichierMP3 f){
-		if (f!=NULL)
+		this.it=musiques.listIterator();
+		if (f!=null)
 			musiques.remove(f);
 		else 
 			System.out.println("Impossible de supprimer, problème de fichier.");
@@ -46,14 +57,11 @@ public class Playlist{
     }
 	
 	public void exportM3U8(String cheminFichier){
-		File fichier = new File(cheminFichier);
-		fichier.createNewFile();
-		FileWriter ecrire = new FileWriter(cheminFichier);
-		for (FichierMP3 son : this.Playlist){
-			ecrire.write(son.getAbsolutePath());
-			ecrire.write("\n");
+		try(FileWriter ecrire = new FileWriter(cheminFichier)){
+		for (FichierMP3 son : this.musiques){
+			ecrire.write(son.getAbsolutePath()+"\n");
+			}
 		}
-		ecrire.close();
 	}
 
 	public void exportJSPF(String cheminFichier){
@@ -61,12 +69,12 @@ public class Playlist{
 		
 		ecrire.write("{\n\t\"playlist\": {\n\t\t\"track\": [");
 		
-		Iterator<FichierMP3> it = musiques.iterator();
+		Iterator<FichierMP3> ite = musiques.iterator();
 
 
-		while(it.hasNext()){
-			ecrire.write("\n\t\t\t{ \"location\":"+ "\""+it.next().getAbsolutePath()+"\""+" }");
-			if (it.hasNext())
+		while(ite.hasNext()){
+			ecrire.write("\n\t\t\t{ \"location\":"+ "\""+ite.next().getAbsolutePath()+"\""+" }");
+			if (ite.hasNext())
 				ecrire.write(",");
 		}
 
@@ -78,11 +86,11 @@ public class Playlist{
 		try(FileWriter ecrire = new FileWriter(cheminFichier)){
 			ecrire.write("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\">\n\t<trackList>");
 
-			Iterator<FichierMP3> it = musiques.iterator();
+			Iterator<FichierMP3> ite = musiques.iterator();
 
 
-			while(it.hasNext()){
-				ecrire.write("\n\t\t<track>\n\t\t\t<location>"+ it.next().getAbsolutePath()+"</location>\n\t\t</track>");
+			while(ite.hasNext()){
+				ecrire.write("\n\t\t<track>\n\t\t\t<location>"+ ite.next().getAbsolutePath()+"</location>\n\t\t</track>");
 			}
 				ecrire.write("\n\t</trackList>\n</playlist>");
 		}
@@ -104,5 +112,5 @@ public class Playlist{
 		return this.musiques;
 	}
 	
-	//public String toString(){}
+	//methode toString
 }
