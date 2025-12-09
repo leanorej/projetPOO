@@ -45,6 +45,49 @@ public class Playlist{
 			System.out.println("Pas de son précedent.");
     }
 	
+	public void exportM3U8(String cheminFichier){
+		File fichier = new File(cheminFichier);
+		fichier.createNewFile();
+		FileWriter ecrire = new FileWriter(cheminFichier);
+		for (FichierMP3 son : this.Playlist){
+			ecrire.write(son.getAbsolutePath());
+			ecrire.write("\n");
+		}
+		ecrire.close();
+	}
+
+	public void exportJSPF(String cheminFichier){
+		try(FileWriter ecrire = new FileWriter(cheminFichier)){
+		
+		ecrire.write("{\n\t\"playlist\": {\n\t\t\"track\": [");
+		
+		Iterator<FichierMP3> it = musiques.iterator();
+
+
+		while(it.hasNext()){
+			ecrire.write("\n\t\t\t{ \"location\":"+ "\""+it.next().getAbsolutePath()+"\""+" }");
+			if (it.hasNext())
+				ecrire.write(",");
+		}
+
+		ecrire.write("\n\t\t]\n\t}\n}");
+		}
+	}
+
+	public void exportXSPF(String cheminFichier){
+		try(FileWriter ecrire = new FileWriter(cheminFichier)){
+			ecrire.write("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\">\n\t<trackList>");
+
+			Iterator<FichierMP3> it = musiques.iterator();
+
+
+			while(it.hasNext()){
+				ecrire.write("\n\t\t<track>\n\t\t\t<location>"+ it.next().getAbsolutePath()+"</location>\n\t\t</track>");
+			}
+				ecrire.write("\n\t</trackList>\n</playlist>");
+		}
+	}
+	
 	public void setNom(String n){
 		this.nom = n;
 	}

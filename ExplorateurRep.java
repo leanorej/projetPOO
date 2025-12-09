@@ -10,7 +10,7 @@ public class ExplorateurRep {
 
     ArrayList<File> listeMP3;
 
-    public ExplorateurRep(String chemin) {
+    public ExplorateurRep() {
         this.listeMP3 = new ArrayList<File> ();
     }
 
