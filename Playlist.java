@@ -59,8 +59,10 @@ public class Playlist{
 	public void exportM3U8(String cheminFichier){
 		try(FileWriter ecrire = new FileWriter(cheminFichier)){
 		for (FichierMP3 son : this.musiques){
-			ecrire.write(son.getAbsolutePath()+"\n");
+			ecrire.write(son.getC()+"\n");
 			}
+		}catch (IOException e){
+			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
 		}
 	}
 
@@ -73,13 +75,16 @@ public class Playlist{
 
 
 		while(ite.hasNext()){
-			ecrire.write("\n\t\t\t{ \"location\":"+ "\""+ite.next().getAbsolutePath()+"\""+" }");
+			ecrire.write("\n\t\t\t{ \"location\":"+ "\""+ite.next().getC()+"\""+" }");
 			if (ite.hasNext())
 				ecrire.write(",");
 		}
 
 		ecrire.write("\n\t\t]\n\t}\n}");
+		} catch (IOException e){
+			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
 		}
+
 	}
 
 	public void exportXSPF(String cheminFichier){
@@ -90,9 +95,11 @@ public class Playlist{
 
 
 			while(ite.hasNext()){
-				ecrire.write("\n\t\t<track>\n\t\t\t<location>"+ ite.next().getAbsolutePath()+"</location>\n\t\t</track>");
+				ecrire.write("\n\t\t<track>\n\t\t\t<location>"+ ite.next().getC()+"</location>\n\t\t</track>");
 			}
 				ecrire.write("\n\t</trackList>\n</playlist>");
+		}catch (IOException e){
+			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
 		}
 	}
 	

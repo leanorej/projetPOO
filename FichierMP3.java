@@ -17,11 +17,22 @@ public class FichierMP3{
 	public FichierMP3(Metadonnees m, FluxAudio f, String t, String c){
 		this.metad = m;
 		this.flux = f;
-		this.type = t;
+		this.type = t ;
 		this.chemin = c;
 		File file = new File(c);
         this.nom = file.getName();
 	}
+
+	public FichierMP3(String chemin){
+		this.metad = null;
+		this.flux = null;
+		this.type = "mp3";
+		this.chemin = chemin;
+		File file = new File(chemin);
+        this.nom = file.getName();
+	}		
+
+
 	
 	public void extraireMD() throws IOException {
 		File f = new File(chemin);

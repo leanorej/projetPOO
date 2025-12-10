@@ -31,7 +31,7 @@ public class ExplorateurRep {
                         repertoire(f.getAbsolutePath());
                     if(f.isFile()){
                         if (f.getName().toLowerCase().endsWith(".mp3")){
-                            this.listeMP3.add(f);
+                            this.listeMP3.add(new FichierMP3(f.getAbsolutePath()));
                             }
                         }
                     }
@@ -52,7 +52,7 @@ public class ExplorateurRep {
 
         ArrayList<String> chemins= new ArrayList<>();
         for (FichierMP3 f : liste)
-            chemins.add(f.getAbsolutePath());
+            chemins.add(f.getC());
     
         return chemins;
     }
