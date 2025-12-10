@@ -42,10 +42,10 @@ public class FichierMP3{
             String titre   = new String(buffer, 3, 30).trim();
             String artiste = new String(buffer, 33, 30).trim();
             String album   = new String(buffer, 63, 30).trim();
-            String anneeStr = new String(buffer, 93, 4).trim();
+            String anneeS = new String(buffer, 93, 4).trim();
 
             Integer annee = null;
-            try { annee = Integer.parseInt(anneeStr); } catch (Exception e) {}
+            try { annee = Integer.parseInt(anneeS); } catch (Exception e) {}
 
             Duree d = new Duree(0, 0, 0);
 
