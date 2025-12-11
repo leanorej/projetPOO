@@ -2,7 +2,11 @@ package projetpoo;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
+import com.mpatric.mp3agic.ID3v1;
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.Mp3File;
+
+
 
 
 public class FichierMP3{
@@ -31,42 +35,48 @@ public class FichierMP3{
 		File file = new File(chemin);
         this.nom = file.getName();
 	}		
-
-
 	
-	public void extraireMD() throws IOException {
-		File f = new File(chemin);
-		if(!f.exists()){
-			return;
-		}
-		try (RandomAccessFile raf = new RandomAccessFile(f, "r")) {
-			raf.seek(raf.length() - 128);
-			byte[] buffer = new byte[128];
-            raf.read(buffer);
-            
-            String tag = new String(buffer, 0, 3);
-            if (!tag.equals("TAG")) {
-                System.out.println("Aucun tag ID3v1 trouvé.");
-                return;
-            }
-            
-            String titre   = new String(buffer, 3, 30).trim();
-            String artiste = new String(buffer, 33, 30).trim();
-            String album   = new String(buffer, 63, 30).trim();
-            String anneeS = new String(buffer, 93, 4).trim();
+	public void extraireMD() throws Exception {
 
-            Integer annee = null;
-            try { annee = Integer.parseInt(anneeS); } catch (Exception e) {}
+    	Mp3File mp3 = new Mp3File(chemin);
 
-            Duree d = new Duree(0, 0, 0);
+    	String titre = null;
+    	String artiste = null;
+    	String album = null;
+    	String annee = null;
+    	
+		if (mp3.hasId3v2Tag()) {
+        	ID3v2 tag = mp3.getId3v2Tag();
+        	titre = tag.getTitle();
+        	artiste = tag.getArtist();
+        	album = tag.getAlbum();
+        	annee = tag.getYear();
+    	}
+   
+    	else if (mp3.hasId3v1Tag()) {
+        	ID3v1 tag = mp3.getId3v1Tag();
+        	titre = tag.getTitle();
+        	artiste = tag.getArtist();
+        	album = tag.getAlbum();
+        	annee = tag.getYear();
+    	}
 
-            this.metad = new Metadonnees(titre, artiste, album, d, annee);
-        }
-		
+    	this.metad.setTitre(titre);
+		this.metad.setArt(artiste);
+		this.metad.setAlb(album); 
+		this.metad.setAnneeSortie(annee);
+		this.metad.setType("mp3");
+
+		int totalSec = (int) mp3.getLengthInSeconds();
+		int heures = totalSec / 3600;
+		int minutes = (totalSec % 3600) / 60;
+		int secondes = totalSec % 60;
+		Duree d = new Duree(heures, minutes, secondes);
+		this.metad.setD(d); 
 	}
-	
-	//public void chargerFichier(){}
-	
+
+
+
 	public Metadonnees getM(){
 		return this.metad;
 	}

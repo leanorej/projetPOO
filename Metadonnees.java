@@ -54,7 +54,7 @@ public class Metadonnees {
 		this.artiste = art;
 	}
 	
-	public void sertAlb(String alb){
+	public void setAlb(String alb){
 		this.album = alb;
 	}
 	
@@ -65,6 +65,11 @@ public class Metadonnees {
 	public void setAn(Integer an){
 		this.annee = an;
 	}
+	
+	public void setAnneeSortie(String an) {
+        try { this.annee = Integer.parseInt(an); }
+        catch(Exception e) { this.annee = null; }
+    }
 		
 	public String toString () {
 		return "titre : " + titre + "\nartiste : " + artiste + "\nalbum : " +this.album + "\ndurée : "+ duree + "\nannée de sortie : " + annee + "\ntype : " + type + "\n";
