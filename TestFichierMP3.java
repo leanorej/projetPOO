@@ -1,4 +1,4 @@
-package test;
+package projetpoo;
 
 import projetpoo.FichierMP3;
 import projetpoo.Metadonnees;
