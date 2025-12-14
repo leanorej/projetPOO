@@ -19,28 +19,31 @@ public class Playlist{
 
 	public Playlist(String n, String chemin){
 		this.nom=n;
+
 		ExplorateurRep e = new ExplorateurRep();
 		e.repertoire(chemin);
 		this.musiques=e.getListeMP3();
+		
 		this.it=musiques.listIterator();
 	}
 
 	
-	public void ajouter(FichierMP3 f){
+	public void ajouter(String cheminSon){
+		FichierMP3 nvxSon = new FichierMP3(cheminSon);
 		this.it=musiques.listIterator();
-		if (f!=null)
-			musiques.add(f);
+		if (nvxSon!=null)
+			musiques.add(nvxSon);
 		else 
 			System.out.println("Impossible d'ajouter, problème de fichier.");
     }
 	
-	public void supprimer(FichierMP3 f){
-		this.it=musiques.listIterator();
-		if (f!=null)
-			musiques.remove(f);
-		else 
-			System.out.println("Impossible de supprimer, problème de fichier.");
-	}
+	//public void supprimer(String cheminSon){
+	//	this.it=musiques.listIterator();
+	//	if (supSon!=null)
+	//		musiques.remove(supSon);
+	//	else 
+	//		System.out.println("Impossible de supprimer, problème de fichier.");
+	//}
 
 	public void sonSuivant(){
 		if (it.hasNext())
@@ -119,5 +122,13 @@ public class Playlist{
 		return this.musiques;
 	}
 	
-	//methode toString
+	public String toString(){
+		String listeMusiques ="Playlist : " + getNom() + "\n\n";
+		for (FichierMP3 son : musiques){
+			listeMusiques += son.getNom() + "\n";
+			//listeMusiques += son.getM().getTitre() + " " + son.getM().getArt() + "\n";
+		}
+		return listeMusiques ;
+	}
+
 }

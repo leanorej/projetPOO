@@ -23,7 +23,7 @@ public class TestExplorateur {
         File son4 = new File ("testSon","fichier1.txt");
         son4.createNewFile();
 
-        File son5 = new File ("testSon","son3.Mp3");
+        File son5 = new File ("testSon","son3.mP3");
         son5.createNewFile();
 
 
@@ -38,5 +38,8 @@ public class TestExplorateur {
             System.out.println(son.getNom());
         }
 
+        for(String chem : cheminExp){
+            System.out.println(chem);
+        }
     }
 }
