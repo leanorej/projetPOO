@@ -1,9 +1,7 @@
 package projetpoo;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
 
 
 public class ExplorateurRep {
@@ -30,13 +28,22 @@ public class ExplorateurRep {
                     if (f.isDirectory())
                         repertoire(f.getAbsolutePath());
                     if(f.isFile()){
-                        if (f.getName().toLowerCase().endsWith(".mp3")){
-                            this.listeMP3.add(new FichierMP3(f.getAbsolutePath()));
+                        try {
+                            Path path = f.toPath();
+                            String typeMime = Files.probeContentType(path);
+    
+                            if (f.getName().toLowerCase().endsWith(".mp3") && "audio/mpeg".equals(typeMime)){
+                                this.listeMP3.add(new FichierMP3(f.getAbsolutePath()));
+                                }
                             }
+                        catch(IOException e){
+                            System.out.println("Erreur : " + e.getMessage());
                         }
+                        
                     }
             }
             return this.listeMP3;
+        }
         }
     }
 
@@ -45,10 +52,7 @@ public class ExplorateurRep {
     }
     
     public ArrayList <String> cheminMP3(String chemin){
-        ExplorateurRep e = new ExplorateurRep();
-        e.repertoire(chemin);
-
-        ArrayList<FichierMP3> liste = e.getListeMP3();
+        ArrayList<FichierMP3> liste = this.listeMP3;
 
         ArrayList<String> chemins= new ArrayList<>();
         for (FichierMP3 f : liste)

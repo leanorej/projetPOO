@@ -8,13 +8,12 @@ public class Playlist{
 	//attributs
 	protected String nom;
 	protected ArrayList<FichierMP3> musiques;
-	protected ListIterator<FichierMP3> it ;
-
+	protected int indiceCourant ;
 
 	public Playlist(String n){
 		this.nom = n;
 		this.musiques = new ArrayList<>();
-		this.it=musiques.listIterator();
+		this.indiceCourant = 0;
 	}
 
 	public Playlist(String n, String chemin){
@@ -24,40 +23,55 @@ public class Playlist{
 		e.repertoire(chemin);
 		this.musiques=e.getListeMP3();
 		
-		this.it=musiques.listIterator();
+		this.indiceCourant = 0;
 	}
 
 	
 	public void ajouter(String cheminSon){
 		FichierMP3 nvxSon = new FichierMP3(cheminSon);
-		this.it=musiques.listIterator();
-		if (nvxSon!=null)
-			musiques.add(nvxSon);
-		else 
-			System.out.println("Impossible d'ajouter, problème de fichier.");
-    }
-	
-	//public void supprimer(String cheminSon){
-	//	this.it=musiques.listIterator();
-	//	if (supSon!=null)
-	//		musiques.remove(supSon);
-	//	else 
-	//		System.out.println("Impossible de supprimer, problème de fichier.");
-	//}
+		musiques.add(nvxSon);
+		}
 
-	public void sonSuivant(){
-		if (it.hasNext())
-			it.next();
-		else 
-			System.out.println("Pas de son suivant.");
+	public void supprimer(FichierMP3 f){
+		int indiceSup = 0 ;
+		boolean trouve = false ;
+		while ( !trouve && indiceSup < musiques.size()){
+			if (f.equals(musiques.get(indiceSup)))
+				trouve = true ;
+			else 
+				indiceSup++ ;
+		}
+		if (trouve)
+			musiques.remove(indiceSup);
+	}
+
+	public FichierMP3 sonSuivant(){
+		if(indiceCourant >= musiques.size() -1 ){
+			System.out.println("Aucun son suivant, fin de la playlist.");
+			return null;
+		}
+		else{
+			this.indiceCourant++ ;
+			return musiques.get(indiceCourant);
+		}
     }
 
-	public void sonPrecedent(){
-		if (it.hasPrevious())
-			it.previous();
-		else 
-			System.out.println("Pas de son précedent.");
-    }
+	public FichierMP3 sonCourant(){
+		if(!musiques.isEmpty())
+			return musiques.get(indiceCourant);
+		return null ;
+	}
+
+	public FichierMP3 sonPrecedent(){
+		if(indiceCourant <= 0 ){
+			System.out.println("Aucun son précédent, début de la playlist.");
+			return null ;
+		}	
+		else{
+			this.indiceCourant-- ;
+			return musiques.get(indiceCourant);
+		}
+	}
 	
 	public void exportM3U8(String cheminFichier){
 		try(FileWriter ecrire = new FileWriter(cheminFichier)){
@@ -125,8 +139,7 @@ public class Playlist{
 	public String toString(){
 		String listeMusiques ="Playlist : " + getNom() + "\n\n";
 		for (FichierMP3 son : musiques){
-			listeMusiques += son.getNom() + "\n";
-			//listeMusiques += son.getM().getTitre() + " " + son.getM().getArt() + "\n";
+			listeMusiques += son.getM().getTitre() + " " + son.getM().getArt() + "\n";
 		}
 		return listeMusiques ;
 	}
