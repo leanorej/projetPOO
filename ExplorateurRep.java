@@ -42,8 +42,8 @@ public class ExplorateurRep {
                         
                     }
             }
-            return this.listeMP3;
         }
+        return this.listeMP3;
         }
     }
 

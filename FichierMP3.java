@@ -28,12 +28,19 @@ public class FichierMP3{
 	}
 
 	public FichierMP3(String chemin){
-		this.metad = null;
+		this.metad = new Metadonnees("", "", "", null, null, "mp3" );
 		this.flux = null;
 		this.type = "mp3";
 		this.chemin = chemin;
-		File file = new File(chemin);
-        this.nom = file.getName();
+
+		File fichier = new File(chemin);
+        this.nom = fichier.getName();
+
+		try{
+			this.extraireMD();
+		} catch(Exception e){
+			System.out.println("Erreur");
+		}
 	}		
 	
 	public void extraireMD() throws Exception {

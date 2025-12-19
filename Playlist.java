@@ -26,13 +26,19 @@ public class Playlist{
 		this.indiceCourant = 0;
 	}
 
+	public void supprimerPlaylist(){
+		this.nom = "" ;
+		this.musiques.clear();
+		this.indiceCourant=0;
+	}
+
 	
-	public void ajouter(String cheminSon){
+	public void ajouterSon(String cheminSon) {
 		FichierMP3 nvxSon = new FichierMP3(cheminSon);
 		musiques.add(nvxSon);
 		}
 
-	public void supprimer(FichierMP3 f){
+	public void supprimerSon(FichierMP3 f){
 		int indiceSup = 0 ;
 		boolean trouve = false ;
 		while ( !trouve && indiceSup < musiques.size()){
@@ -75,10 +81,10 @@ public class Playlist{
 	
 	public void exportM3U8(String cheminFichier){
 		try(FileWriter ecrire = new FileWriter(cheminFichier)){
-		for (FichierMP3 son : this.musiques){
-			ecrire.write(son.getC()+"\n");
+			for (FichierMP3 son : this.musiques){
+				ecrire.write(son.getC()+"\n");
 			}
-		}catch (IOException e){
+		} catch (IOException e){
 			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
 		}
 	}
@@ -137,11 +143,22 @@ public class Playlist{
 	}
 	
 	public String toString(){
-		String listeMusiques ="Playlist : " + getNom() + "\n\n";
-		for (FichierMP3 son : musiques){
-			listeMusiques += son.getM().getTitre() + " " + son.getM().getArt() + "\n";
+		if (musiques.isEmpty())
+			return "Playlist vide";
+		else {
+			String listeMusiques ="Playlist : " + getNom() + "\n\n";
+			for (FichierMP3 son : musiques){
+				if (son.getM().getTitre()==null && son.getM().getArt()==null)
+					listeMusiques += "Artiste et titre inconnu" + "\n" ;
+				else if (son.getM().getTitre()==null)
+					listeMusiques += "titre inconnu " + son.getM().getArt() + "\n" ;
+				else if (son.getM().getArt()==null)
+					listeMusiques += son.getM().getTitre() + " artiste inconnu(e)" + "\n" ;
+				else
+					listeMusiques += son.getM().getTitre() + " " + son.getM().getArt() + "\n";
+			}
+			return listeMusiques ;
 		}
-		return listeMusiques ;
 	}
 
 }

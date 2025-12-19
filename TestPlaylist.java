@@ -8,47 +8,71 @@ import java.io.*;
 public class TestPlaylist {
     public static void main (String [] args)throws IOException{
 
-        File dossier = new File ("testSon");
+        // création d'un vrai dossier avec 5 fichiers dont 3 fichiers mp3
+        //File dossier = new File ("testSon2");
 
-        dossier.mkdir();
+        //dossier.mkdir();
 
-        File son1 = new File ("testSon","son1.MP3");
-            son1.createNewFile();
-        File son2 = new File ("testSon","son2.mp3");
-            son2.createNewFile();
-        File son3 = new File ("testSon","fichier2.txt");
-            son3.createNewFile();
-        File son4 = new File ("testSon","fichier1.txt");
-            son4.createNewFile();
-        File son5 = new File ("testSon","son3.mP3");
-            son5.createNewFile();
+        //File son1 = new File ("testSon2","son1.MP3");
+        //    son1.createNewFile();
+        //File son2 = new File ("testSon2","son2.mp3");
+        //    son2.createNewFile();
+        //File son3 = new File ("testSon2","fichier2.txt");
+        //    son3.createNewFile();
+        //File son4 = new File ("testSon2","fichier1.txt");
+        //    son4.createNewFile();
+        //File son5 = new File ("testSon2","son3.mP3");
+        //    son5.createNewFile();
+        //////////////////////////////////////////////////////////////////
+        
 
-        Playlist play = new Playlist("musique cool","testSon");
+        // création playlist avec tout les fichiers mp3 du dossier testSon2, puis affichage du contenu
+
+        Playlist play = new Playlist("musique cool","/Users/nur/Desktop/testPlaylist");
 
         System.out.println(play);        
 
-        play.ajouter("testSon/son6.mp3");
+        /////////////////////////////////////////////////////////////////
+
+        // ajout d'un nouveau son, il n'apparaitra pas dans le dossier reel, puis affichage    
+
+        play.ajouterSon("/Users/nur/Desktop/projetPOO/01WhatADay.mp3");
 
         System.out.println(play.toString());
 
+        /////////////////////////////////////////////////////////////////
+        
+        File dossier = new File ("testSon2");
+        dossier.mkdir();
 
-
-        File playX = new File ("testSon","play.xspf");
+        File playX = new File ("testSon2","play.xspf");
             playX.createNewFile();
 
-        play.exportXSPF("testSon/play.xspf");
+        play.exportXSPF("testSon2/play.xspf");
 
-        File playJ = new File ("testSon","play.jspf");
+        File playJ = new File ("testSon2","play.jspf");
             playJ.createNewFile();
 
-        play.exportJSPF("testSon/play.jspf");
+        play.exportJSPF("testSon2/play.jspf");
 
-        File playM = new File ("testSon","play.m3u8");
+
+
+        /////////////////////////////////////////////////////////////////
+
+
+        File playM = new File ("testSon2","play.m3u8");
             playM.createNewFile();
 
-        play.exportM3U8("testSon/play.m3u8");
+        play.exportM3U8("testSon2/play.m3u8");
 
 
+        
+        // suppression de la playlist puis affichage pour verifier
+
+        play.supprimerPlaylist();
+        System.out.println(play.toString());
+
+        /////////////////////////////////////////////////////////////////
 
     }
 }
