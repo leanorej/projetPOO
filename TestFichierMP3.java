@@ -8,7 +8,7 @@ import projetpoo.Duree;
 public class TestFichierMP3 {
 
     public static void main(String[] args) {
-        String cheminTest = "/Users/leanore.j/Documents/projetPOO/musique4.mp3";
+        String cheminTest = "/Users/leanore.j/Documents/projetPOO/01WhatADay.mp3";
         Metadonnees m = new Metadonnees("", "", "", new Duree(0, 0, 0), null);
         FluxAudio f = new FluxAudio(" ");
         FichierMP3 mp3 = new FichierMP3(m, f, " ", cheminTest);
