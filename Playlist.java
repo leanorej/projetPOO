@@ -4,17 +4,36 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import java.io.*;
 
+/**
+ * classe permettant la gestion d'une playlist.
+ */
+
 public class Playlist{
 	//attributs
 	protected String nom;
 	protected ArrayList<FichierMP3> musiques;
 	protected int indiceCourant ;
 
+	/**
+	 * Constructeur qui crée une playlist vide avec un nom donné en paramètre.
+	 */
+
 	public Playlist(String n){
 		this.nom = n;
 		this.musiques = new ArrayList<>();
 		this.indiceCourant = 0;
 	}
+
+
+	/**
+	 * Constructeur qui crée une playlist composé de tout les fichiers mp3 contenu dans le chemin donné en paramètre et ayant un nom donné en paramètre.
+	 */
+
+	
+	/*
+	 * Constructeur de la classe playlist.
+	 * cree un explorateur pour recuperer tout les fichiers MP3 contenue dans le chemin donné en paramètre pour ensuite recuperer cette liste et l'affecter à notre liste de musiques.
+	 */
 
 	public Playlist(String n, String chemin){
 		this.nom=n;
@@ -26,17 +45,42 @@ public class Playlist{
 		this.indiceCourant = 0;
 	}
 
+	/**
+	 * Méthode permettant de supprimer une playlist en la vidant et en supprimant son nom.
+	 */
+
+
 	public void supprimerPlaylist(){
 		this.nom = "" ;
 		this.musiques.clear();
 		this.indiceCourant=0;
 	}
 
-	
+	/**
+	 * Méthode permettant d'ajouter un son dans la playlist à partir de son chemin.
+	 * @param cheminSon chemin du fichierMP3 à ajouter.
+	 */
+
+	/*
+	 * Methode qui transforme le chemin vers le son que l'on souhaite ajouter en fichierMP3 afin de pouvoir l'ajouter à notre attribut qui contient la liste de musiques.
+	 */
+
 	public void ajouterSon(String cheminSon) {
 		FichierMP3 nvxSon = new FichierMP3(cheminSon);
 		musiques.add(nvxSon);
 		}
+
+	
+	/**
+	 * Méthode permettant de supprimer un son de la playlist.
+	 * @param f le fichierMP3 à supprimer.
+	 */
+
+	/*
+	 * Méthode permettant de supprimer un son de la playlist.
+	 * On vérifie d'abord que le fichier existe bien dans la playlist.
+	 * si il existe on le retire, sinon on ne fait rien.
+	*/
 
 	public void supprimerSon(FichierMP3 f){
 		int indiceSup = 0 ;
@@ -51,6 +95,12 @@ public class Playlist{
 			musiques.remove(indiceSup);
 	}
 
+
+	/**
+	 * Méthode permettant de passer au son suivant grâce à l'indice courant.
+	 * @return FichierMP3 le fichier audio suivant.
+	 */
+
 	public FichierMP3 sonSuivant(){
 		if(indiceCourant >= musiques.size() -1 ){
 			System.out.println("Aucun son suivant, fin de la playlist.");
@@ -62,11 +112,21 @@ public class Playlist{
 		}
     }
 
+	/**
+	 * Méthode permettant d'acceder au son courant.
+	 * @return FichierMP3 le fichier audio courant.
+	 */
+
 	public FichierMP3 sonCourant(){
 		if(!musiques.isEmpty())
 			return musiques.get(indiceCourant);
 		return null ;
 	}
+
+	/**
+	 * Méthode permettant de passer au son précedant grâce à l'indice courant.
+	 * @return FichierMP3 le fichier audio précedant.
+	 */
 
 	public FichierMP3 sonPrecedent(){
 		if(indiceCourant <= 0 ){
@@ -78,6 +138,20 @@ public class Playlist{
 			return musiques.get(indiceCourant);
 		}
 	}
+
+
+	/*
+	 * on crée un FileWriter pour pouvoir ecrire dans le fichier donné en paramètre.
+	 * si le fichier existe, on écrase son contenu avec ce qu'on souhaite écrire.
+	 * si le fichier n'existe pas, il en crée un.
+	*/
+
+
+
+	/**
+	 * Méthode permettant d'exporter la playlist en format M3U8 vers un fichier choisi.
+	 * @param cheminFichier le chemin du fichier dans lequel on souhaite exporter la playlist.
+	 */
 	
 	public void exportM3U8(String cheminFichier){
 		try(FileWriter ecrire = new FileWriter(cheminFichier)){
@@ -88,6 +162,12 @@ public class Playlist{
 			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
 		}
 	}
+
+	/**
+	 * Méthode permettant d'exporter la playlist en format JSPF vers un fichier choisi.
+	 * @param cheminFichier le chemin du fichier dans lequel on souhaite exporter la playlist.
+	 */
+	
 
 	public void exportJSPF(String cheminFichier){
 		try(FileWriter ecrire = new FileWriter(cheminFichier)){
@@ -109,6 +189,13 @@ public class Playlist{
 		}
 
 	}
+
+
+	/**
+	 * Méthode permettant d'exporter la playlist en format XSPF vers un fichier choisi.
+	 * @param cheminFichier le chemin du fichier dans lequel on souhaite exporter la playlist.
+	 */
+
 
 	public void exportXSPF(String cheminFichier){
 		try(FileWriter ecrire = new FileWriter(cheminFichier)){
@@ -142,6 +229,10 @@ public class Playlist{
 		return this.musiques;
 	}
 	
+
+
+	//On affiche en allant à la ligne, l'artiste et le titre de chaque musiques, selon s'ils sont chacun connus ou non.
+
 	public String toString(){
 		if (musiques.isEmpty())
 			return "Playlist vide";
