@@ -56,9 +56,12 @@ public class ExplorateurRep {
             File[] liste = dossier.listFiles();
             
             if (liste !=null){
+
                 for (File f : liste){
+
                     if (f.isDirectory())
                         repertoire(f.getAbsolutePath());
+
                     if(f.isFile()){
                         try {
                             Path path = f.toPath();
@@ -74,6 +77,7 @@ public class ExplorateurRep {
                     }
                 }
             }
+            
             return this.listeMP3;
         }
     }
