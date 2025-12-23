@@ -1,0 +1,13 @@
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+	<trackList>
+		<track>
+			<location>/Users/nur/Desktop/projetPOO/01WhatADay.mp3</location>
+		</track>
+		<track>
+			<location>/Users/nur/Desktop/projetPOO/musique3.mp3</location>
+		</track>
+		<track>
+			<location>/Users/nur/Desktop/projetPOO/musique4.mp3</location>
+		</track>
+	</trackList>
+</playlist>

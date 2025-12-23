@@ -61,13 +61,21 @@ public class Playlist{
 	 * @param cheminSon chemin du fichierMP3 à ajouter.
 	 */
 
-	/*
-	 * Methode qui transforme le chemin vers le son que l'on souhaite ajouter en fichierMP3 afin de pouvoir l'ajouter à notre attribut qui contient la liste de musiques.
-	 */
+	// Methode qui transforme le chemin vers le son que l'on souhaite ajouter en fichierMP3 afin de pouvoir l'ajouter à notre attribut qui contient la liste de musiques.
 
+	
 	public void ajouterSon(String cheminSon) {
 		FichierMP3 nvxSon = new FichierMP3(cheminSon);
-		musiques.add(nvxSon);
+
+		boolean trouve = false ;
+		for (FichierMP3 son : musiques){
+			if (son.getM().equals(nvxSon.getM()) || son.getNom().equals(nvxSon.getNom()))
+				trouve = true ;
+		}
+		if (!trouve)
+			musiques.add(nvxSon);
+		else 
+			System.out.println( nvxSon.getNom()+" existe déjà dans la playlist.");
 		}
 
 	
@@ -101,25 +109,31 @@ public class Playlist{
 	 * @return FichierMP3 le fichier audio suivant.
 	 */
 
-	public FichierMP3 sonSuivant(){
-		if(indiceCourant >= musiques.size() -1 ){
-			System.out.println("Aucun son suivant, fin de la playlist.");
-			return null;
-		}
-		else{
+	public FichierMP3 sonSuivant() {
+		if (!musiques.isEmpty()){
+			if(indiceCourant >= musiques.size() -1 ){
+				System.out.println("Aucun son suivant, fin de la playlist.");
+				return musiques.get(indiceCourant);
+			}
+
 			this.indiceCourant++ ;
 			return musiques.get(indiceCourant);
 		}
-    }
+		System.out.println("Playlist vide");
+		return null ;
+	}
+	
+    
 
 	/**
 	 * Méthode permettant d'acceder au son courant.
 	 * @return FichierMP3 le fichier audio courant.
 	 */
 
-	public FichierMP3 sonCourant(){
+	public FichierMP3 sonCourant() {
 		if(!musiques.isEmpty())
-			return musiques.get(indiceCourant);
+				return musiques.get(indiceCourant);
+		System.out.println("Playlist vide") ;
 		return null ;
 	}
 
@@ -129,14 +143,16 @@ public class Playlist{
 	 */
 
 	public FichierMP3 sonPrecedent(){
-		if(indiceCourant <= 0 ){
+		if (!musiques.isEmpty()){
+			if(!(indiceCourant <= 0 )){
+				this.indiceCourant-- ;
+				return musiques.get(indiceCourant);
+			}
 			System.out.println("Aucun son précédent, début de la playlist.");
-			return null ;
-		}	
-		else{
-			this.indiceCourant-- ;
 			return musiques.get(indiceCourant);
 		}
+		System.out.println("Playlist vide");
+		return null ;
 	}
 
 
@@ -154,12 +170,12 @@ public class Playlist{
 	 */
 	
 	public void exportM3U8(String cheminFichier){
-		try(FileWriter ecrire = new FileWriter(cheminFichier)){
+		try(BufferedWriter buff = new BufferedWriter(new FileWriter(cheminFichier))){
 			for (FichierMP3 son : this.musiques){
-				ecrire.write(son.getC()+"\n");
+				buff.write(son.getC()+"\n");
 			}
 		} catch (IOException e){
-			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
+			System.out.println("Erreur de fichier : " + e.getMessage());
 		}
 	}
 
@@ -170,24 +186,22 @@ public class Playlist{
 	
 
 	public void exportJSPF(String cheminFichier){
-		try(FileWriter ecrire = new FileWriter(cheminFichier)){
-		
-		ecrire.write("{\n\t\"playlist\": {\n\t\t\"track\": [");
-		
-		Iterator<FichierMP3> ite = musiques.iterator();
+		try (BufferedWriter buff = new BufferedWriter(new FileWriter(cheminFichier))){
 
+			buff.write("{\n\t\"playlist\": {\n\t\t\"track\": [");
+			buff.write("{\n\t\"playlist\": {\n\t\t\"track\": [");
+			
+			Iterator<FichierMP3> ite = musiques.iterator();
+			while(ite.hasNext()){
+				buff.write("\n\t\t\t{ \"location\":"+ "\""+ite.next().getC()+"\""+" }");
+				if (ite.hasNext())
+					buff.write(",");
+			}
+			buff.write("\n\t\t]\n\t}\n}");
 
-		while(ite.hasNext()){
-			ecrire.write("\n\t\t\t{ \"location\":"+ "\""+ite.next().getC()+"\""+" }");
-			if (ite.hasNext())
-				ecrire.write(",");
-		}
-
-		ecrire.write("\n\t\t]\n\t}\n}");
 		} catch (IOException e){
-			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
+			System.out.println("Erreur de fichier : " + e.getMessage());
 		}
-
 	}
 
 
@@ -198,18 +212,16 @@ public class Playlist{
 
 
 	public void exportXSPF(String cheminFichier){
-		try(FileWriter ecrire = new FileWriter(cheminFichier)){
-			ecrire.write("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\">\n\t<trackList>");
+		try(BufferedWriter buff = new BufferedWriter(new FileWriter(cheminFichier))){
+			buff.write("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\">\n\t<trackList>");
 
 			Iterator<FichierMP3> ite = musiques.iterator();
-
-
 			while(ite.hasNext()){
-				ecrire.write("\n\t\t<track>\n\t\t\t<location>"+ ite.next().getC()+"</location>\n\t\t</track>");
+				buff.write("\n\t\t<track>\n\t\t\t<location>"+ ite.next().getC()+"</location>\n\t\t</track>");
 			}
-				ecrire.write("\n\t</trackList>\n</playlist>");
-		}catch (IOException e){
-			System.out.println("Erreur lors de l'écriture : " + e.getMessage());
+				buff.write("\n\t</trackList>\n</playlist>");
+		} catch (IOException e){
+			System.out.println("Erreur de fichier : " + e.getMessage());
 		}
 	}
 	
