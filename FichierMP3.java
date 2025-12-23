@@ -78,7 +78,7 @@ public class FichierMP3{
 		int heures = totalSec / 3600;
 		int minutes = (totalSec % 3600) / 60;
 		int secondes = totalSec % 60;
-		Duree d = new Duree(heures, minutes, secondes);
+		Duree d = new Duree(secondes, minutes, heures);
 		this.metad.setD(d); 
 	}
 
