@@ -1,10 +1,19 @@
 package projetpoo;
 
+/**
+* Classe durée qui permet d'avoir la durée d'un son en heures, minutes et secondes
+*/
+
 public class Duree{
-	//attributs
+	
 	protected int min;
 	protected int sec;
 	protected int h;
+	
+	/**
+	* Constructeur d'une durée
+	* Paramètres : les secondes, les minutes et les heures
+	*/
 	
 	public Duree(int s, int m, int h){
 		this.sec = s;
@@ -12,9 +21,19 @@ public class Duree{
 		this.h = h;
 	}
 	
+	/**
+	* Permet de modifier les secondes d'une durée
+	* Paramètre : la nouvelle durée en secondes
+	*/
+	
 	public void setS(int s){
 		this.sec = s;
 	}
+
+	/**
+	* Permet de modifier les minutes d'une durée
+	* Paramètre : la nouvelle durée en minutes
+	*/
 
 	public void setM(int m){
 		this.min = m;

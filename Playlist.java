@@ -9,7 +9,7 @@ import java.io.*;
  */
 
 public class Playlist{
-	//attributs
+	
 	protected String nom;
 	protected ArrayList<FichierMP3> musiques;
 	protected int indiceCourant ;
@@ -231,7 +231,9 @@ public class Playlist{
 	
 
 
-	//On affiche en allant à la ligne, l'artiste et le titre de chaque musiques, selon s'ils sont chacun connus ou non.
+	/*
+	*On affiche en allant à la ligne, l'artiste et le titre de chaque 
+	musiques, selon s'ils sont chacun connus ou non.
 
 	public String toString(){
 		if (musiques.isEmpty())
