@@ -49,29 +49,20 @@ Les fonctionnalités disponibles via le **mode console** sont :
 ***
 ### Commandes de compilations et d'executions
 
-- Compilation :
-***
-javac -d classesJava -cp "./lib/mp3agic-0.9.1.jar" *.java
+- Compilation                        : javac -d classesJava -cp "./lib/mp3agic-0.9.1.jar" *.java
 
-- Lancer l'interface graphique (GUI) : 
-***
-java -cp "./classesJava:./lib/mp3agic-0.9.1.jar" projetpoo.GUI
+- Lancer l'interface graphique (GUI) : java -cp "./classesJava:./lib/mp3agic-0.9.1.jar" projetpoo.GUI
 
-- Lancer le mode console (CLI) :
-***
-java -cp "classesJava:lib/mp3agic-0.9.1.jar" projetpoo.CLI 
+- Lancer le mode console (CLI)       : java -cp "classesJava:lib/mp3agic-0.9.1.jar" projetpoo.CLI 
 
 ***
 ### Composition du dossier contenant le projet 
 
 projetPOO
-***
--> fichiers.java    : On retrouve directement l'ensemble des fichiers.java 
-***
--> classesJava      : Sous dossier qui contient l'ensemble des fichiers.class (fichiers compilés)
-***
--> fichiers mp3     : Sous dossier qui contient des fichiers MP3
--> lib              : Sous dossier qui contient le fichier mp3agic-0.9.1.jar qui sert pour l'extraction des métadonnées
-***
--> README.md        : Contient la documentation d'utilisation du projet 
+
+- fichiers.java    : On retrouve directement l'ensemble des fichiers.java 
+- classesJava      : Sous dossier qui contient l'ensemble des fichiers.class (fichiers compilés)
+- fichiers mp3     : Sous dossier qui contient des fichiers MP3
+- lib              : Sous dossier qui contient le fichier mp3agic-0.9.1.jar qui sert pour l'extraction des métadonnées
+- README.md        : Contient la documentation d'utilisation du projet 
 
