@@ -11,7 +11,6 @@ import java.io.File;
  * Les playlists sont affichées dans une JList
  * La sélection d'une playlist déclenche l'affichage des fichiers MP3 dans la partie inférieure
  * La sélection d'un MP3 met à jour le PanelLecteur pour afficher ses métadonnées
- * Les boutons permettent de créer une nouvelle playlist, ajouter ou supprimer un MP3
  */
 public class PanelPlaylist extends JPanel {
 
@@ -19,7 +18,7 @@ public class PanelPlaylist extends JPanel {
     private JList<Playlist> listePlaylists; // Composant graphique affichant les playlists
     private DefaultListModel<FichierMP3> modeleMP3; // Modèle de données pour la JList des fichiers MP3
     private JList<FichierMP3> listeMP3; // Composant graphique affichant les fichiers MP3
-    private JTextField recherche; // Champ texte permettant de filtrer les MP3
+    private JTextField recherche; // Champ texte pour filtrer les MP3
     private PanelLecteur lecteur; // Référence au panel lecteur pour mise à jour des métadonnées
 
     /**
@@ -30,27 +29,19 @@ public class PanelPlaylist extends JPanel {
     public PanelPlaylist(PanelLecteur lecteur) {
         this.lecteur = lecteur;
 
-        setLayout(new BorderLayout(10, 10)); // Layout principal avec 10px de marge
-        setBackground(new Color(245, 240, 230)); // Couleur de fond du panel
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); // Marge intérieure
+        setLayout(new BorderLayout(10, 10));
+        setBackground(new Color(245, 240, 230));
+        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        /**
-         * Configuration de la liste des playlists :
-         * - un modèle pour stocker les objets Playlist
-         * - écouteur pour détecter la sélection et mettre à jour les fichiers MP3
-         */
+        // Liste des playlists
         modelePlaylists = new DefaultListModel<>();
         listePlaylists = new JList<>(modelePlaylists);
         listePlaylists.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listePlaylists.addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) rafraichirMP3(); // Met à jour la liste des MP3 lorsque la playlist change
+            if (!e.getValueIsAdjusting()) rafraichirMP3();
         });
 
-        /**
-         * Configuration de la liste des fichiers MP3 :
-         * - un modèle pour stocker les objets FichierMP3
-         * - écouteur pour détecter la sélection et afficher les métadonnées dans le lecteur
-         */
+        // Liste des fichiers MP3
         modeleMP3 = new DefaultListModel<>();
         listeMP3 = new JList<>(modeleMP3);
         listeMP3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -61,19 +52,15 @@ public class PanelPlaylist extends JPanel {
             }
         });
 
-        /**
-         * Barre de recherche pour filtrer les MP3
-         */
+        // Barre de recherche
         recherche = new JTextField();
         recherche.setToolTipText("Rechercher une musique par nom...");
         recherche.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyReleased(KeyEvent e) { filtrerMP3(); } // Filtrage dynamique à chaque frappe
+            public void keyReleased(KeyEvent e) { filtrerMP3(); }
         });
 
-        /**
-         * Panel du haut contenant le titre et la barre de recherche
-         */
+        // Panel du haut avec titre et recherche
         JLabel titre = new JLabel("Playlists");
         titre.setFont(new Font("Arial", Font.BOLD, 20));
         titre.setForeground(new Color(240, 190, 80));
@@ -82,9 +69,7 @@ public class PanelPlaylist extends JPanel {
         top.add(titre, BorderLayout.NORTH);
         top.add(recherche, BorderLayout.SOUTH);
 
-        /**
-         * Boutons pour créer une playlist, ajouter ou supprimer des MP3
-         */
+        // Boutons
         JButton btnCreer = new JButton("Créer playlist");
         btnCreer.addActionListener(e -> {
             String nom = JOptionPane.showInputDialog(this, "Nom de la playlist :", "Playlist par défaut");
@@ -117,9 +102,7 @@ public class PanelPlaylist extends JPanel {
         boutons.add(btnAjouter);
         boutons.add(btnSupprimer);
 
-        /**
-         * SplitPane pour afficher la liste des playlists en haut et les MP3 en bas
-         */
+        // SplitPane : playlists en haut, MP3 en bas
         JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
                 new JScrollPane(listePlaylists),
                 new JScrollPane(listeMP3));
@@ -131,9 +114,8 @@ public class PanelPlaylist extends JPanel {
     }
 
     /**
-     * Ajoute des fichiers MP3 à une playlist donnée
-     * Ouvre un JFileChooser pour sélectionner un ou plusieurs fichiers MP3
-     * @param p Playlist dans laquelle ajouter les fichiers sélectionnés
+     * Ajoute des fichiers MP3 à une playlist
+     * @param p Playlist cible
      */
     private void ajouterMP3(Playlist p) {
         JFileChooser chooser = new JFileChooser();
@@ -154,7 +136,6 @@ public class PanelPlaylist extends JPanel {
 
     /**
      * Met à jour la liste des MP3 affichés selon la playlist sélectionnée
-     * Si aucune playlist n'est sélectionnée, la liste reste vide
      */
     private void rafraichirMP3() {
         Playlist selected = listePlaylists.getSelectedValue();
@@ -166,7 +147,6 @@ public class PanelPlaylist extends JPanel {
 
     /**
      * Filtre les MP3 affichés selon le texte saisi dans la barre de recherche
-     * La recherche est insensible à la casse et se fait uniquement sur le nom du fichier
      */
     private void filtrerMP3() {
         Playlist selected = listePlaylists.getSelectedValue();
@@ -178,3 +158,4 @@ public class PanelPlaylist extends JPanel {
         }
     }
 }
+

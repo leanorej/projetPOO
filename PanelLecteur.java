@@ -25,54 +25,43 @@ public class PanelLecteur extends JPanel {
         setBackground(new Color(245, 240, 230)); // Fond clair pour contraste avec PanelPlaylist
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); // Marge intérieure autour des composants
 
-        /**
-         * Label pour le titre du morceau
-         * Centré, avec une police colorée
-         */
+        // Label pour le titre du morceau
         titreLabel = new JLabel("Son en cours", SwingConstants.CENTER);
-        titreLabel.setFont(new Font("Arial", Font.BOLD, 20)); // Police Arial, gras, taille 20
-        titreLabel.setForeground(new Color(240, 190, 80)); // Couleur orange
+        titreLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titreLabel.setForeground(new Color(240, 190, 80));
 
-        /**
-         * Panel pour l'image
-         * Zone carrée avec un cadre violet
-         */
+        // Panel pour l'image
         imagePanel = new JPanel();
         imagePanel.setPreferredSize(new Dimension(200, 200));
         imagePanel.setBorder(BorderFactory.createLineBorder(new Color(160, 140, 220), 4));
 
-        /**
-         * Panel pour les boutons de contrôle
-         */
+        // Panel pour les boutons de contrôle
         controlesPanel = new JPanel();
-        controlesPanel.setOpaque(false); // Fond transparent
+        controlesPanel.setOpaque(false);
         controlesPanel.add(new JButton("⏮")); // Bouton précédent
         controlesPanel.add(new JButton("⏯")); // Bouton lecture/pause
         controlesPanel.add(new JButton("⏭")); // Bouton suivant
 
-        /**
-         * Ajout des composants au panel principal
-         */
+        // Ajout des composants au panel principal
         add(titreLabel, BorderLayout.NORTH);
         add(imagePanel, BorderLayout.CENTER);
         add(controlesPanel, BorderLayout.SOUTH);
     }
-    
+
     /**
- 	* Met à jour le panel pour afficher les métadonnées d'un MP3
- 	* @param md objet Metadonnees du MP3 sélectionné
- 	*/
-	public void afficherMetadonnees(Metadonnees md) {
-    	if (md != null) {
-        	titreLabel.setText(md.getTitre() != null ? md.getTitre() : "Titre inconnu");
+     * Met à jour le panel pour afficher les métadonnées d'un MP3
+     * @param md objet Metadonnees du MP3 sélectionné
+     */
+    public void afficherMetadonnees(Metadonnees md) {
+        if (md != null) {
+            titreLabel.setText(md.getTitre() != null ? md.getTitre() : "Titre inconnu");
         } else {
-        	titreLabel.setText("Son en cours");
-    	}
-	}
-
+            titreLabel.setText("Son en cours");
+        }
+    }
 
     /**
-     * Méthode permettant de mettre à jour le titre affiché dans le panel lorsqu'un MP3 est sélectionné
+     * Met à jour le titre affiché dans le panel lorsqu'un MP3 est sélectionné
      * @param titre Titre du morceau à afficher
      */
     public void setTitre(String titre) {
@@ -80,7 +69,7 @@ public class PanelLecteur extends JPanel {
     }
 
     /**
-     * Méthode permettant d'accéder au panel image (potentielle pochette) pour éventuellement y afficher une image ou un visuel
+     * Permet d'accéder au panel image pour éventuellement y afficher une pochette
      * @return JPanel imagePanel
      */
     public JPanel getImagePanel() {
