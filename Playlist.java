@@ -156,7 +156,7 @@ public class Playlist{
 	}
 
 
-	/*
+	/**
 	 * on crée un FileWriter pour pouvoir ecrire dans le fichier donné en paramètre.
 	 * si le fichier existe, on écrase son contenu avec ce qu'on souhaite écrire.
 	 * si le fichier n'existe pas, il en crée un.
@@ -241,29 +241,10 @@ public class Playlist{
 		return this.musiques;
 	}
 	
-
-
-	/*
-	*On affiche en allant à la ligne, l'artiste et le titre de chaque 
-	musiques, selon s'ils sont chacun connus ou non.
+// On affiche le nom de la playlist
 
 	public String toString(){
-		if (musiques.isEmpty())
-			return "Playlist vide";
-		else {
-			String listeMusiques ="Playlist : " + getNom() + "\n\n";
-			for (FichierMP3 son : musiques){
-				if (son.getM().getTitre()==null && son.getM().getArt()==null)
-					listeMusiques += "Artiste et titre inconnu" + "\n" ;
-				else if (son.getM().getTitre()==null)
-					listeMusiques += "titre inconnu " + son.getM().getArt() + "\n" ;
-				else if (son.getM().getArt()==null)
-					listeMusiques += son.getM().getTitre() + " artiste inconnu(e)" + "\n" ;
-				else
-					listeMusiques += son.getM().getTitre() + " " + son.getM().getArt() + "\n";
-			}
-			return listeMusiques ;
-		}
+		return this.nom;
 	}
 
 }

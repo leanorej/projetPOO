@@ -1,5 +1,4 @@
 package projetpoo;
-package projetpoo;
 
 	/**
 	* Classe qui contient les métadonnées d'un fichier MP3
