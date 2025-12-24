@@ -59,14 +59,9 @@ java -cp "classesJava:lib/mp3agic-0.9.1.jar" projetpoo.CLI
 ### Composition du dossier contenant le projet 
 
 projetPOO
--> fichiers.java 
-> on retrouve directement l'ensemble des fichiers.java 
--> classesJava
-> sous dossier qui contient l'ensemble des fichiers.class (fichiers compilés)
--> fichiers mp3
-> sous dossier qui contient des fichiers MP3
--> lib
-> sous dossier qui contient le fichier mp3agic-0.9.1.jar qui sert pour l'extraction des métadonnées
--> README.md
-> contient la documentation d'utilisation du projet 
+-> fichiers.java    : On retrouve directement l'ensemble des fichiers.java 
+-> classesJava      : Sous dossier qui contient l'ensemble des fichiers.class (fichiers compilés)
+-> fichiers mp3     : Sous dossier qui contient des fichiers MP3
+-> lib              : Sous dossier qui contient le fichier mp3agic-0.9.1.jar qui sert pour l'extraction des métadonnées
+-> README.md        : Contient la documentation d'utilisation du projet 
 
