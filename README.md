@@ -8,13 +8,14 @@
 4. Commandes de compilations et d'executions
 5. Composition du dossier contenant le projet 
 
-
+***
 ### Information étudiants
 
 Groupe DL5
 - Leanore **Jean**
 - Nur **Chouaref**
 
+***
 ### Objectif
 
 Les objectifs principaux du projet sont **l'extraction des métadonnées de fichiers MP3** ainsi que **la création de playlist**.
@@ -32,6 +33,7 @@ Les fonctionnalités disponibles via le **mode console** sont :
 - l'exportation d'un fichier MP3 un format choisi (xspf/jspf/m3u8) vers un fichier ;
 - l'exportation d'une playlist créée à partir de tous les fichiers MP3 d'un dossier dans un format choisi (xspf/jspf/m3u8) vers un fichier.
 
+***
 ### Importer le projet
 
 1. ouvrir le terminal
@@ -44,7 +46,7 @@ Les fonctionnalités disponibles via le **mode console** sont :
 5. mkdir classesJava
 > Crée le dossier dans lequel on placera les fichiers compilés
 
-
+***
 ### Commandes de compilations et d'executions
 
 - Compilation :
@@ -59,9 +61,11 @@ java -cp "./classesJava:./lib/mp3agic-0.9.1.jar" projetpoo.GUI
 ***
 java -cp "classesJava:lib/mp3agic-0.9.1.jar" projetpoo.CLI 
 
+***
 ### Composition du dossier contenant le projet 
 
 projetPOO
+***
 -> fichiers.java    : On retrouve directement l'ensemble des fichiers.java 
 ***
 -> classesJava      : Sous dossier qui contient l'ensemble des fichiers.class (fichiers compilés)
