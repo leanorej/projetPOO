@@ -15,7 +15,8 @@ public class Playlist{
 	protected int indiceCourant ;
 
 	/**
-	 * Constructeur qui crée une playlist vide avec un nom donné en paramètre.
+	 * Constructeur 
+	 * Crée une playlist vide avec un nom donné en paramètre.
 	 */
 
 	public Playlist(String n){
@@ -26,13 +27,8 @@ public class Playlist{
 
 
 	/**
-	 * Constructeur qui crée une playlist composé de tout les fichiers mp3 contenu dans le chemin donné en paramètre et ayant un nom donné en paramètre.
-	 */
-
-	
-	/*
-	 * Constructeur de la classe playlist.
-	 * cree un explorateur pour recuperer tout les fichiers MP3 contenue dans le chemin donné en paramètre pour ensuite recuperer cette liste et l'affecter à notre liste de musiques.
+	 * Constructeur 
+	 * Crée une playlist composé de tout les fichiers mp3 contenu dans le chemin donné en paramètre et ayant un nom donné en paramètre.
 	 */
 
 	public Playlist(String n, String chemin){
@@ -60,9 +56,6 @@ public class Playlist{
 	 * Méthode permettant d'ajouter un son dans la playlist à partir de son chemin.
 	 * @param cheminSon chemin du fichierMP3 à ajouter.
 	 */
-
-	// Methode qui transforme le chemin vers le son que l'on souhaite ajouter en fichierMP3 afin de pouvoir l'ajouter à notre attribut qui contient la liste de musiques.
-
 	
 	public void ajouterSon(String cheminSon) {
 		FichierMP3 nvxSon = new FichierMP3(cheminSon);
@@ -83,12 +76,6 @@ public class Playlist{
 	 * Méthode permettant de supprimer un son de la playlist.
 	 * @param f le fichierMP3 à supprimer.
 	 */
-
-	/*
-	 * Méthode permettant de supprimer un son de la playlist.
-	 * On vérifie d'abord que le fichier existe bien dans la playlist.
-	 * si il existe on le retire, sinon on ne fait rien.
-	*/
 
 	public void supprimerSon(FichierMP3 f){
 		int indiceSup = 0 ;
@@ -241,8 +228,6 @@ public class Playlist{
 		return this.musiques;
 	}
 	
-// On affiche le nom de la playlist
-
 	public String toString(){
 		return this.nom;
 	}

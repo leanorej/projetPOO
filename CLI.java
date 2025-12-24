@@ -5,7 +5,7 @@ import java.io.*;
 
 
 /**
- * mode console  
+ * mode console permettant l'extraction de métadonnées ainsi que l'exportation de playlist en format xspf, jspf ou m3u8.
  */
 
 public class CLI {
@@ -13,10 +13,7 @@ public class CLI {
 
             try{
 
-                /**
-                 * Si il n'y a pas d'argument dans la ligne de commande, 
-                 */
-
+                
                 if (args.length==0){
                         System.out.println("\nAucun argument, veuillez saisir -h afin de connaître les differentes options.\n");
                     }
