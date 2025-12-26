@@ -4,8 +4,8 @@ package projetpoo;
 import javax.swing.ImageIcon;
 
 /**
-* Classe qui contient les métadonnées d'un fichier MP3
-*/
+ * Classe qui contient les métadonnées d'un fichier MP3
+ */
 public class Metadonnees {
 
 	protected String titre;
@@ -17,9 +17,13 @@ public class Metadonnees {
 	protected ImageIcon image; 
 
 	/**
-	* Constructeur qui crée des métadonnées
-	* @parametres : le titre, l'artiste, l'album, la durée et l'année de sortie
-	*/
+	 * Constructeur qui crée des métadonnées
+	 * @param t le titre du morceau
+	 * @param art l'artiste
+	 * @param alb l'album
+	 * @param d la durée
+	 * @param an l'année de sortie
+	 */
 	public Metadonnees(String t, String art, String alb, Duree d, Integer an) {
 		this.titre = t;
 		this.artiste = art;
@@ -31,9 +35,14 @@ public class Metadonnees {
 	}
 
 	/**
-	* Constructeur qui crée des métadonnées
-	* @parametres : le titre, l'artiste, l'album, la durée, l'année de sortie et le type
-	*/
+	 * Constructeur qui crée des métadonnées
+	 * @param t le titre du morceau
+	 * @param art l'artiste
+	 * @param alb l'album
+	 * @param d la durée
+	 * @param an l'année de sortie
+	 * @param type le type de fichier (ex: "mp3")
+	 */
 	public Metadonnees(String t, String art, String alb, Duree d, Integer an, String type) {
 		this.titre = t;
 		this.artiste = art;
@@ -45,85 +54,90 @@ public class Metadonnees {
 	}
 
 	/**
-	* Permet de récupérer le titre dans les métadonnées
-	*/
+	 * @return le titre du morceau
+	 */
 	public String getTitre() {
 		return this.titre;
 	}
 
 	/**
-	* Permet de récupérer l'artiste
-	*/
+	 * @return l'artiste
+	 */
 	public String getArt() {
 		return this.artiste;
 	}
 
 	/**
-	* Permet de récupérer l'album
-	*/
+	 * @return l'album
+	 */
 	public String getAlb() {
 		return this.album;
 	}
 
 	/**
-	* Permet de récupérer la durée
-	*/
+	 * @return la durée
+	 */
 	public Duree getDuree() {
 		return this.duree;
 	}
 
 	/**
-	* Permet de récupérer l'année de sortie
-	*/
+	 * @return l'année de sortie
+	 */
 	public Integer getAn() {
 		return this.annee;
 	}
 
 	/**
-	* Permet de récupérer le type
-	*/
+	 * @return le type du fichier
+	 */
 	public String getType() {
 		return this.type;
 	}
 
 	/**
-	* Permet de récupérer l'image de couverture
-	*/
+	 * @return l'image de couverture
+	 */
 	public ImageIcon getImage() {
 		return this.image;
 	}
 
 	/**
-	* Permet de modifier le titre
-	*/
+	 * Modifie le titre
+	 * @param t le nouveau titre
+	 */
 	public void setTitre(String t) {
 		this.titre = t;
 	}
 
 	/**
-	* Permet de modifier l'artiste
-	*/
+	 * Modifie l'artiste
+	 * @param art le nouvel artiste
+	 */
 	public void setArt(String art) {
 		this.artiste = art;
 	}
 
 	/**
-	* Permet de modifier l'album
-	*/
+	 * Modifie l'album
+	 * @param alb le nouvel album
+	 */
 	public void setAlb(String alb) {
 		this.album = alb;
 	}
 
 	/**
-	* Permet de modifier la durée
-	*/
+	 * Modifie la durée
+	 * @param d la nouvelle durée
+	 */
 	public void setD(Duree d) {
 		this.duree = d;
 	}
 
 	/**
-	* Permet de modifier l'année de sortie à partir d'une chaîne
-	*/
+	 * Modifie l'année de sortie à partir d'une chaîne
+	 * @param an l'année de sortie sous forme de chaîne
+	 */
 	public void setAnneeSortie(String an) {
 		try {
 			this.annee = Integer.parseInt(an);
@@ -133,23 +147,25 @@ public class Metadonnees {
 	}
 
 	/**
-	* Permet de modifier le type du fichier
-	*/
+	 * Modifie le type du fichier
+	 * @param type le type de fichier
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
 	/**
-	* Permet de définir l'image de couverture
-	*/
+	 * Définit l'image de couverture
+	 * @param image l'image du morceau
+	 */
 	public void setImage(ImageIcon image) {
 		this.image = image;
 	}
 
 	/**
-	* Méthode toString
-	* @return les métadonnées, c'est à dire le titre, l'artiste, l'album, la durée, l'année de sortie et le type
-	*/
+	 * Méthode toString
+	 * @return les métadonnées : titre, artiste, album, durée, année de sortie et type
+	 */
 	public String toString() {
 		return "titre : " + titre +
 			   "\nartiste : " + artiste +

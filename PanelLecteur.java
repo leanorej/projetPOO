@@ -25,39 +25,28 @@ public class PanelLecteur extends JPanel {
 		setBackground(new Color(245, 240, 230)); // Fond clair pour contraste avec PanelPlaylist
 		setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); // Marge intérieure autour des composants
 
-		/**
-		 * Label pour le titre du morceau
-		 * Centré, avec une police colorée
-		 */
+		// Label pour le titre du morceau
 		titreLabel = new JLabel("Son en cours", SwingConstants.CENTER);
 		titreLabel.setFont(new Font("Arial", Font.BOLD, 20));
 		titreLabel.setForeground(new Color(240, 190, 80));
 
-		/**
-		 * Panel pour l'image
-		 * Zone carrée avec un cadre violet
-		 */
+		// Panel pour l'image
 		imagePanel = new JPanel(new BorderLayout());
 		imagePanel.setPreferredSize(new Dimension(200, 200));
 		imagePanel.setBorder(BorderFactory.createLineBorder(new Color(160, 140, 220), 4));
-		// Placeholder par défaut
 		JLabel placeholder = new JLabel("Pas d'image", SwingConstants.CENTER);
 		placeholder.setOpaque(true);
 		placeholder.setBackground(new Color(220, 220, 220));
 		imagePanel.add(placeholder, BorderLayout.CENTER);
 
-		/**
-		 * Panel pour les boutons de contrôle
-		 */
+		// Panel pour les boutons de contrôle
 		controlesPanel = new JPanel();
 		controlesPanel.setOpaque(false);
 		controlesPanel.add(new JButton("⏮")); // Bouton précédent
 		controlesPanel.add(new JButton("⏯")); // Bouton lecture/pause
 		controlesPanel.add(new JButton("⏭")); // Bouton suivant
 
-		/**
-		 * Ajout des composants au panel principal
-		 */
+		// Ajout des composants au panel principal
 		add(titreLabel, BorderLayout.NORTH);
 		add(imagePanel, BorderLayout.CENTER);
 		add(controlesPanel, BorderLayout.SOUTH);
@@ -65,7 +54,7 @@ public class PanelLecteur extends JPanel {
 
 	/**
 	 * Met à jour le panel pour afficher les métadonnées d'un MP3
-	 * @parametres md objet Metadonnees du MP3 sélectionné
+	 * @param md objet Metadonnees du MP3 sélectionné
 	 */
 	public void afficherMetadonnees(Metadonnees md) {
 		imagePanel.removeAll();
@@ -98,7 +87,7 @@ public class PanelLecteur extends JPanel {
 
 	/**
 	 * Méthode permettant de mettre à jour le titre affiché dans le panel lorsqu'un MP3 est sélectionné
-	 * @parametres titre Titre du morceau à afficher
+	 * @param titre Titre du morceau à afficher
 	 */
 	public void setTitre(String titre) {
 		titreLabel.setText(titre);
@@ -106,7 +95,7 @@ public class PanelLecteur extends JPanel {
 
 	/**
 	 * Méthode permettant d'accéder au panel image (potentielle pochette) pour éventuellement y afficher une image ou un visuel
-	 * @return JPanel imagePanel
+	 * @return le JPanel contenant l'image
 	 */
 	public JPanel getImagePanel() {
 		return imagePanel;

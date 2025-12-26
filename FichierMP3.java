@@ -7,8 +7,8 @@ import com.mpatric.mp3agic.Mp3File;
 import javax.swing.ImageIcon;
 
 /**
-* Classe permettant la gestion des métadonnées d'un fichier MP3
-*/
+ * Classe permettant la gestion des métadonnées d'un fichier MP3
+ */
 public class FichierMP3 {
 
     protected String nom;
@@ -18,9 +18,12 @@ public class FichierMP3 {
     protected String chemin;
 
     /**
-    * Constructeur qui crée un fichier MP3
-    * @parametres métadonnees m, le flux audio f, le type t, le chemin c
-    */
+     * Constructeur qui crée un fichier MP3
+     * @param m les métadonnées du fichier MP3
+     * @param f le flux audio du fichier MP3
+     * @param t le type du fichier (ex: "mp3")
+     * @param c le chemin complet du fichier
+     */
     public FichierMP3(Metadonnees m, FluxAudio f, String t, String c){
         this.metad = m;
         this.flux = f;
@@ -31,9 +34,9 @@ public class FichierMP3 {
     }
 
     /**
-    * Constructeur qui crée un fichier MP3 à partir de son chemin
-    * @parametre le chemin 
-    */
+     * Constructeur qui crée un fichier MP3 à partir de son chemin
+     * @param chemin le chemin complet du fichier
+     */
     public FichierMP3(String chemin){
         this.metad = new Metadonnees("", "", "", null, null, "mp3");
         this.flux = null;
@@ -51,9 +54,9 @@ public class FichierMP3 {
     }
 
     /**
-    * Méthode qui permet d'extraire les métadonnées d'un fichier MP3
-    * @throws une erreur si le tag ne correspond pas
-    */
+     * Méthode qui permet d'extraire les métadonnées d'un fichier MP3
+     * @throws Exception si le tag ne correspond pas ou si le fichier MP3 est invalide
+     */
     public void extraireMD() throws Exception {
         Mp3File mp3 = new Mp3File(chemin);
 
@@ -99,42 +102,87 @@ public class FichierMP3 {
         this.metad.setD(d);
     }
 
-    // Getters et Setters 
+    // Getters et Setters avec documentation
 
+    /**
+     * @return les métadonnées du fichier MP3
+     */
     public Metadonnees getM(){
-    	return this.metad; 
-    }
-    public FluxAudio getF(){
-    	return this.flux;
-    }
-    public String getNom(){
-    	return this.nom;
-    }
-    public String getT(){
-    	return this.type;
-    }
-    public String getC(){
-    	return this.chemin;
-    }
-    public void setM(Metadonnees m){
-    	this.metad = m;
-    }
-    public void setF(FluxAudio f){
-    	this.flux = f;
-    }
-    public void setT(String t){
-    	this.type = t;
-    }
-    public void setC(String c){
-    	this.chemin = c;
-    }
-    public void setNom(String nom){
-    	this.nom = nom;
+        return this.metad; 
     }
 
     /**
-    * Méthode toString
-    */
+     * @return le flux audio du fichier MP3
+     */
+    public FluxAudio getF(){
+        return this.flux;
+    }
+
+    /**
+     * @return le nom du fichier MP3
+     */
+    public String getNom(){
+        return this.nom;
+    }
+
+    /**
+     * @return le type du fichier MP3
+     */
+    public String getT(){
+        return this.type;
+    }
+
+    /**
+     * @return le chemin complet du fichier MP3
+     */
+    public String getC(){
+        return this.chemin;
+    }
+
+    /**
+     * Définit les métadonnées du fichier MP3
+     * @param m les nouvelles métadonnées
+     */
+    public void setM(Metadonnees m){
+        this.metad = m;
+    }
+
+    /**
+     * Définit le flux audio du fichier MP3
+     * @param f le nouveau flux audio
+     */
+    public void setF(FluxAudio f){
+        this.flux = f;
+    }
+
+    /**
+     * Définit le type du fichier MP3
+     * @param t le type
+     */
+    public void setT(String t){
+        this.type = t;
+    }
+
+    /**
+     * Définit le chemin du fichier MP3
+     * @param c le chemin complet
+     */
+    public void setC(String c){
+        this.chemin = c;
+    }
+
+    /**
+     * Définit le nom du fichier MP3
+     * @param nom le nouveau nom
+     */
+    public void setNom(String nom){
+        this.nom = nom;
+    }
+
+    /**
+     * Méthode toString
+     * @return une chaîne représentant le fichier MP3 et ses métadonnées
+     */
     public String toString(){
         return nom + " : \n" + metad + "\ntype : " + type + "\nchemin : " + chemin;
     }

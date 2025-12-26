@@ -24,7 +24,7 @@ public class PanelPlaylist extends JPanel {
     /**
      * Constructeur de PanelPlaylist
      * Initialise tous les composants graphiques et les modèles de données
-     * @parametres lecteur référence au panel lecteur pour afficher les métadonnées du fichier MP3 sélectionné
+     * @param lecteur référence au panel lecteur pour afficher les métadonnées du fichier MP3 sélectionné
      */
     public PanelPlaylist(PanelLecteur lecteur) {
         this.lecteur = lecteur;
@@ -107,10 +107,10 @@ public class PanelPlaylist extends JPanel {
         listePlaylists.setSelectedIndex(0);
     }
 
-	/**
-	* Méthode ajouterMP3 qui permet d'ajouter un fihicer MP3 à la playlist séléctionnée
-	* @parametres une playlist p séléctionnée
-	*/
+    /**
+     * Méthode ajouterMP3 qui permet d'ajouter un fichier MP3 à la playlist sélectionnée
+     * @param p la playlist sélectionnée
+     */
     private void ajouterMP3(Playlist p) {
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(true);
@@ -122,9 +122,10 @@ public class PanelPlaylist extends JPanel {
             rafraichirMP3();
         }
     }
-	/**
-	* Méthode rafraichirMP3
-	*/
+
+    /**
+     * Méthode rafraichirMP3 : met à jour l'affichage des MP3 de la playlist sélectionnée
+     */
     private void rafraichirMP3() {
         modeleMP3.clear();
         Playlist selected = listePlaylists.getSelectedValue();
