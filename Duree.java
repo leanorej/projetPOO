@@ -12,7 +12,7 @@ public class Duree{
 	
 	/**
 	* Constructeur d'une durée
-	* Paramètres : les secondes, les minutes et les heures
+	* @parametres : les secondes, les minutes et les heures
 	*/
 	
 	public Duree(int s, int m, int h){
@@ -22,18 +22,12 @@ public class Duree{
 	}
 	
 	/**
-	* Permet de modifier les secondes d'une durée
-	* Paramètre : la nouvelle durée en secondes
+	* Getters et Setters
 	*/
 	
 	public void setS(int s){
 		this.sec = s;
 	}
-
-	/**
-	* Permet de modifier les minutes d'une durée
-	* Paramètre : la nouvelle durée en minutes
-	*/
 
 	public void setM(int m){
 		this.min = m;
@@ -54,7 +48,9 @@ public class Duree{
 	public int getH(){
 		return this.h;
 	}
-	
+	/**
+	* methode toString
+	*/
 	public String toString(){
 		if (h<10 && min<10 && sec<10)
 			return "0"+h+" : "+"0"+min+" : " + "0" +sec ;

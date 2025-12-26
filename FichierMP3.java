@@ -19,7 +19,7 @@ public class FichierMP3 {
 
     /**
     * Constructeur qui crée un fichier MP3
-    * @parametres métadonnes m, le flux audio f, le type t, le chemin c
+    * @parametres métadonnees m, le flux audio f, le type t, le chemin c
     */
     public FichierMP3(Metadonnees m, FluxAudio f, String t, String c){
         this.metad = m;
@@ -101,15 +101,36 @@ public class FichierMP3 {
 
     // Getters et Setters 
 
-    public Metadonnees getM(){ return this.metad; }
-    public FluxAudio getF(){ return this.flux; }
-    public String getNom(){ return this.nom; }
-    public String getT(){ return this.type; }
-    public String getC(){ return this.chemin; }
-    public void setM(Metadonnees m){ this.metad = m; }
-    public void setF(FluxAudio f){ this.flux = f; }
-    public void setT(String t){ this.type = t; }
-    public void setC(String c){ this.chemin = c; }
+    public Metadonnees getM(){
+    	return this.metad; 
+    }
+    public FluxAudio getF(){
+    	return this.flux;
+    }
+    public String getNom(){
+    	return this.nom;
+    }
+    public String getT(){
+    	return this.type;
+    }
+    public String getC(){
+    	return this.chemin;
+    }
+    public void setM(Metadonnees m){
+    	this.metad = m;
+    }
+    public void setF(FluxAudio f){
+    	this.flux = f;
+    }
+    public void setT(String t){
+    	this.type = t;
+    }
+    public void setC(String c){
+    	this.chemin = c;
+    }
+    public void setNom(String nom){
+    	this.nom = nom;
+    }
 
     /**
     * Méthode toString
